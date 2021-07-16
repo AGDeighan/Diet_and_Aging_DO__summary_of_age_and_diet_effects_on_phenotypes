@@ -236,13 +236,14 @@ for(PHENO in DATASET$Info_Table$Phenotype){
       TRANSFORM,
       FULL_MODEL, NULL_MODEL, TEST_RESULTS,
       PHENO_SD, PHENO_MEAN,
-      AGE_SD, AGE_MEAN,
       EFFECT, SE,
-      FTEST_STAT, FTEST_DF, FTEST_PV, SIM_PV,
+      FTEST_STAT, FTEST_DENDF, FTEST_NUMDF, FTEST_SCALE, FTEST_PV,
       PAIRWISE_DIFF,
       DF_ROW
     )
   }
+  
+  rm(TP)
   
   cat('\n# ----------------------------- #\n')
 }
@@ -290,9 +291,6 @@ for(PHENO in DATASET$Info_Table$Phenotype){
   )))
   
   MODEL_DATA <- DATASET$Data %>%
-    filter(
-      Timepoint %in% DATASET$Timepoints
-    ) %>%
     select(
       MouseID, Timepoint,
       all_of(na.omit(c(PHENO, VOI, REF_TERMS, FEF_TERMS)))
@@ -419,7 +417,7 @@ for(PHENO in DATASET$Info_Table$Phenotype){
     FULL_MODEL, NULL_MODEL, TEST_RESULTS,
     PHENO_SD, PHENO_MEAN,
     AGE_SD, AGE_MEAN, 
-    EFFECT, SE, FTEST_STAT, FTEST_DF, FTEST_PV, SIM_PV,
+    EFFECT, SE, FTEST_STAT, FTEST_NUMDF, FTEST_DENDF, FTEST_SCALE, FTEST_PV,
     DF_ROW
   )
   
@@ -647,7 +645,7 @@ for(PHENO in DATASET$Info_Table$Phenotype){
     PHENO_SD, PHENO_MEAN,
     AGE_SD, AGE_MEAN,
     EFFECT, SE,
-    FTEST_STAT, FTEST_DF, FTEST_PV, SIM_PV,
+    FTEST_STAT, FTEST_NUMDF, FTEST_DENDF, FTEST_SCALE, FTEST_PV,
     PAIRWISE_DIFF,
     DF_ROW
   )

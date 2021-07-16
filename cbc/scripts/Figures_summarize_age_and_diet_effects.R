@@ -36,105 +36,140 @@ DATASET <- readRDS('data/CBC_diet_age_dataset.rds')
 ################################################################################
 ##### Diet effects by TP #####
 
-STANDARDISED_DATA <- DATASET$Data %>% 
-  filter(
-    Timepoint %in% DATASET$Timepoints
-  )
-
-for(PHENO in as.character(DATASET$Info_Table$Phenotype)){
-  TRANSFORM <- DATASET$Info_Table$Transform[DATASET$Info_Table$Phenotype == PHENO]
-  if(TRANSFORM != 'none'){
-    STANDARDISED_DATA[[PHENO]] <- DATASET$Transform_Functions[[TRANSFORM]](STANDARDISED_DATA[[PHENO]])
-  }
-  
-  MEAN <- DATASET$Info_Table$Mean[DATASET$Info_Table$Phenotype == PHENO]
-  SD <- DATASET$Info_Table$SD[DATASET$Info_Table$Phenotype == PHENO]
-  
-  STANDARDISED_DATA[[PHENO]] <- (STANDARDISED_DATA[[PHENO]] - MEAN)/SD
-  
-  rm(TRANSFORM, MEAN, SD)
-}
-rm(PHENO)
-
-PLOT_DATA <- STANDARDISED_DATA %>% 
-  pivot_longer(
-    cols = as.character(DATASET$Info_Table$Phenotype),
-    values_to = 'Value',
-    names_to = 'Phenotype'
-  ) %>% 
+PLOT_DATA <- DATASET$Diet_Effects %>% 
+  group_by(Timepoint) %>% 
   mutate(
-    Phenotype = factor(Phenotype, levels = levels(DATASET$Info_Table$Phenotype))
-  ) %>% 
-  arrange(
-    Phenotype
-  )
-
-LIMITS <- STANDARDISED_DATA %>% 
-  pivot_longer(
-    cols = as.character(DATASET$Info_Table$Phenotype),
-    values_to = 'Value',
-    names_to = 'Phenotype'
-  ) %>% 
-  group_by(
-    Phenotype, Timepoint, Diet
-  ) %>% 
-  summarise(
-    IQR = IQR(Value, na.rm = TRUE),
-    LB = quantile(Value, 0.25, na.rm = TRUE) - 1.5 * IQR,
-    UB = quantile(Value, 0.75, na.rm = TRUE) + 1.5 * IQR
+    FWER = p.adjust(Diet_FTestPValue, 'holm')
   ) %>% 
   ungroup() %>% 
+  select(
+    Phenotype, Timepoint, FWER,
+    AL_Mean:`40_SE`
+  ) %>% 
+  pivot_longer(
+    cols = AL_Mean:`40_SE`,
+    names_to = 'K',
+    values_to = 'V'
+  ) %>% 
+  separate(
+    K,
+    into = c('Diet', 'K'),
+    sep = '_'
+  ) %>% 
+  pivot_wider(
+    names_from = 'K',
+    values_from = 'V'
+  ) %>% 
+  rowwise() %>% 
+  mutate(
+    Timepoint = factor(
+      Timepoint,
+      levels = DATASET$Timepoints
+    ),
+    Diet = factor(
+      Diet,
+      levels = c('AL', '1D', '2D', '20', '40')
+    ),
+    Position = as.numeric(Phenotype) + ((as.numeric(Diet) - 1)/4 - 0.5)*1/3,
+    Mean = (
+      (Mean - DATASET$Info_Table$Mean[DATASET$Info_Table$Phenotype == Phenotype]) /
+        DATASET$Info_Table$SD[DATASET$Info_Table$Phenotype == Phenotype]
+    ),
+    SE = (
+      SE/DATASET$Info_Table$SD[DATASET$Info_Table$Phenotype == Phenotype]
+    )
+  ) %>% 
+  ungroup()
+
+LIMITS <- PLOT_DATA %>% 
   summarise(
-    LB = min(LB),
-    UB = max(UB)
+    M = max(abs(c(min(Mean - SE), max(Mean + SE))))
   ) %>% 
   unlist() %>% 
-  as.numeric() %>% 
-  abs() %>% 
-  max()
-LIMITS <- ceiling((LIMITS + 0.25)/0.1)*0.1
+  as.numeric()
+LIMITS <- ceiling((LIMITS + 0.1)/0.05)*0.05
 LIMITS <- c(-1*LIMITS, LIMITS)
-
 
 DIET_BY_TP_PLOT <- PLOT_DATA %>% 
   ggplot() +
   theme_minimal(
     base_size = 9
   ) +
-  geom_boxplot(
-    aes(x = Phenotype, y = Value, color = Diet),
-    outlier.shape = NA,
-    lwd = 0.25
-  ) +
-  geom_point(
-    data = DATASET$Diet_Effects %>% 
-      select(
-        Phenotype, Timepoint, Diet_FTestPValue
+  geom_rect(
+    data = PLOT_DATA %>% 
+      group_by(Phenotype, Timepoint) %>% 
+      summarise() %>% 
+      ungroup() %>% 
+      mutate(
+        Position = as.numeric(Phenotype)
       ) %>% 
-      group_by(
-        Timepoint
+      filter(
+        Position %% 2 < 0.5
       ) %>% 
       mutate(
-        FWER = p.adjust(Diet_FTestPValue, 'holm')
+        XMin = Position - 0.5,
+        XMax = Position + 0.5,
+        YMin = LIMITS[1],
+        YMax = LIMITS[2]
+      ),
+    aes(
+      xmin = XMin, xmax = XMax,
+      ymin = YMin, ymax = YMax
+    ),
+    fill = 'gray90',
+    alpha = 1/3
+  ) +
+  geom_hline(
+    yintercept = 0,
+    color = 'gray60',
+    linetype = 3
+  ) +
+  geom_point(
+    data = PLOT_DATA %>% 
+      group_by(
+        Phenotype, Timepoint, FWER
       ) %>% 
+      summarise() %>% 
       ungroup() %>% 
       filter(
         FWER < 0.05
       ) %>% 
       mutate(
-        Position = LIMITS[2] - 0.25
+        X_Position = as.numeric(Phenotype),
+        Y_Position = LIMITS[2] - 0.05
       ),
-    aes(x = Phenotype, y = Position),
+    aes(x = X_Position, y = Y_Position),
     shape = '*',
     size = 5
   ) +
+  geom_errorbar(
+    aes(x = Position, ymin = Mean - SE, ymax = Mean + SE, color = Diet),
+    size = 1/3.3,
+    width = 1/10
+  ) +
+  geom_point(
+    aes(x = Position, y = Mean, color = Diet),
+    size = 0.75
+  ) +
   scale_y_continuous(
-    breaks = seq(-100, 100, 2),
-    minor_breaks = seq(-100, 100, 1),
-    limits = LIMITS
+    breaks = seq(-10, 10, 0.2),
+    minor_breaks = seq(-10, 10, 0.05),
+    limits = LIMITS,
+    exp = c(0, 0)
+  ) +
+  scale_x_continuous(
+    breaks = unique(as.numeric(PLOT_DATA$Phenotype)),
+    minor_breaks = seq(0, 500, 0.5),
+    labels = levels(PLOT_DATA$Phenotype),
+    limits = c(0.49, max(as.numeric(PLOT_DATA$Phenotype)) + 0.51),
+    expand = c(0, 0)
   ) +
   scale_color_manual(
-    values = DIET_COLORS
+    values = DIET_COLORS,
+    na.value = 'black'
+  ) +
+  facet_grid(
+    Timepoint ~ .
   ) +
   theme(
     axis.text.x = element_text(
@@ -144,16 +179,14 @@ DIET_BY_TP_PLOT <- PLOT_DATA %>%
     plot.caption = element_text(hjust = 0),
     legend.position = 'none'
   ) +
-  facet_grid(
-    Timepoint ~ .
-  ) +
   labs(
     title = 'Diet effect on trait values by timepoint',
-    y = 'Standardized trait value',
     x = NULL,
-    color = NULL,
+    y = 'Diet coefficient',
     caption = paste0(
-      'The boxplots show the distribution of the normalized (mean = 0, standard deviation = 1) phenotype at each timepoint grouped by diet',
+      'The diet coefficient for each phenotype at each timepoint indicates the estimated effect in units of standard deviations',
+      '\n',
+      'The bars around the coefficient show +/- 1 standard error of the coefficient',
       '\n',
       'The asterisks indicate phenotypes for which the diet effect is significant at a FWER of 0.05',
       '\n'
@@ -161,7 +194,7 @@ DIET_BY_TP_PLOT <- PLOT_DATA %>%
   )
 
 rm(
-  STANDARDISED_DATA, PLOT_DATA, LIMITS
+  PLOT_DATA, LIMITS
 )
 
 DIET_TP_WIDTH <- 6 + (length(DATASET$Info_Table$Phenotype) - 1)*0.2
@@ -242,10 +275,35 @@ LIMITS <- PLOT_DATA %>%
 LIMITS <- ceiling((LIMITS + 0.01)/0.05)*0.05
 LIMITS <- c(-1*LIMITS, LIMITS)
 
+
 AGE_EFFECTS_PLOT <- PLOT_DATA %>% 
   ggplot() +
   theme_minimal(
     base_size = 9
+  ) +
+  geom_rect(
+    data = PLOT_DATA %>% 
+      group_by(Phenotype, Group) %>% 
+      summarise() %>% 
+      ungroup() %>% 
+      mutate(
+        Position = as.numeric(Phenotype)
+      ) %>% 
+      filter(
+        Position %% 2 < 0.5
+      ) %>% 
+      mutate(
+        YMin = Position - 0.5,
+        YMax = Position + 0.5,
+        XMin = LIMITS[1],
+        XMax = LIMITS[2]
+      ),
+    aes(
+      xmin = XMin, xmax = XMax,
+      ymin = YMin, ymax = YMax
+    ),
+    fill = 'gray90',
+    alpha = 1/3
   ) +
   geom_vline(
     xintercept = 0,
@@ -265,8 +323,8 @@ AGE_EFFECTS_PLOT <- PLOT_DATA %>%
       mutate(
         Position = as.numeric(Phenotype),
         X_Position = ifelse(
-          Group == 'Overall', LIMITS[1],
-          LIMITS[2]
+          Group == 'Overall', LIMITS[1] + 0.005,
+          LIMITS[2] - 0.005
         )
       ),
     aes(x = X_Position, y = Position),
@@ -275,15 +333,18 @@ AGE_EFFECTS_PLOT <- PLOT_DATA %>%
   ) +
   geom_errorbarh(
     aes(xmin = Coef - SE, xmax = Coef + SE, y = Position, color = Diet),
+    size = 1/3,
     height = 1/10
   ) +
   geom_point(
-    aes(x = Coef, y = Position, color = Diet)
+    aes(x = Coef, y = Position, color = Diet),
+    size = 0.8
   ) +
   scale_x_continuous(
     breaks = seq(-10, 10, 0.05),
     minor_breaks = seq(-10, 10, 0.01),
-    limits = LIMITS
+    limits = LIMITS,
+    expand = c(0, 0)
   ) +
   scale_y_continuous(
     breaks = unique(as.numeric(PLOT_DATA$Phenotype)),
