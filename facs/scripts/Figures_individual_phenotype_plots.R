@@ -84,14 +84,15 @@ for(PHENO in as.character(DATASET$Info_Table$Phenotype)){
     theme_minimal(
       base_size = 9
     ) +
-    geom_boxplot(
-      aes(x = Timepoint, y = Pheno, color = Diet),
-      outlier.shape = NA
-    ) +
     geom_point(
       aes(x = Timepoint, y = Pheno, color = Diet),
       position = position_jitterdodge(jitter.width = 0.4),
-      alpha = 0.5
+      alpha = 1/3
+    ) +
+    geom_boxplot(
+      aes(x = Timepoint, y = Pheno, color = Diet),
+      outlier.shape = NA,
+      alpha = 0
     ) +
     scale_color_manual(
       values = DIET_COLORS
@@ -214,7 +215,7 @@ for(PHENO in as.character(DATASET$Info_Table$Phenotype)){
     )
   
   CAPTION_TEXT <- paste0(
-    'Only the following timepoints were used when testing for diet and age effects: ',
+    'Only the following timepoints were used when testing for direct diet and age-diet interaction effects (all timepoints were used when testing for direct age effects): ',
     paste0(
       paste0(
         DATASET$Timepoints[1:(length(DATASET$Timepoints) - 1)], 
@@ -224,7 +225,7 @@ for(PHENO in as.character(DATASET$Info_Table$Phenotype)){
       DATASET$Timepoints[length(DATASET$Timepoints)],
       '. '
     ),
-    'The effects were estimated using mixed linear models and the significance of the effects were assessed with an approximate F-test using the Kenward and Roger (1997) approach. ',
+    'The effects of age, diet, and the age-diet interaction were estimated using mixed linear models and the significance of the effects were assessed with an approximate F-test using the Kenward and Roger (1997) approach. ',
     'The p-values for the diet effect at each timepoint are: ',
     paste0(
       paste0(

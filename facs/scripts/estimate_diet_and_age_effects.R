@@ -236,7 +236,6 @@ for(PHENO in DATASET$Info_Table$Phenotype){
       TRANSFORM,
       FULL_MODEL, NULL_MODEL, TEST_RESULTS,
       PHENO_SD, PHENO_MEAN,
-      AGE_SD, AGE_MEAN,
       EFFECT, SE, 
       FTEST_STAT, FTEST_NUMDF, FTEST_DENDF, FTEST_SCALE, FTEST_PV,
       PAIRWISE_DIFF,
@@ -290,9 +289,6 @@ for(PHENO in DATASET$Info_Table$Phenotype){
   )))
   
   MODEL_DATA <- DATASET$Data %>%
-    filter(
-      Timepoint %in% DATASET$Timepoints
-    ) %>%
     select(
       MouseID, Timepoint,
       all_of(na.omit(c(PHENO, VOI, REF_TERMS, FEF_TERMS)))

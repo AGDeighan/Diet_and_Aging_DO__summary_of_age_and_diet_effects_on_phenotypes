@@ -332,9 +332,6 @@ TP_DIET_COUNT <- ANIMAL_DATA %>%
 
 
 SMRY_STATS <- PHENO_DATA %>% 
-  filter(
-    Timepoint %in% TIMEPOINTS_FOR_ANALYSIS
-  ) %>% 
   select(
     MouseID, all_of(PHENO_NAMES)
   ) %>% 
@@ -373,7 +370,7 @@ SMRY_STATS <- PHENO_DATA %>%
 
 COVARIATES <- tibble(
   Phenotype = PHENO_NAMES,
-  REF_Cov = c('Cohort:MouseID:DateCollect'),
+  REF_Cov = c('MouseID:DateCollect'),
   FEF_Cov = NA
 )
 
@@ -495,7 +492,7 @@ DATA <- PHENO_DATA %>%
   left_join(
     ANIMAL_DATA %>% 
       select(
-        MouseID, Diet, Cohort
+        MouseID, Diet
       ),
     by = 'MouseID'
   ) %>% 
@@ -503,7 +500,7 @@ DATA <- PHENO_DATA %>%
     MouseID,
     all_of(PHENO_INFO_TABLE$Phenotype),
     Age, Timepoint, Diet,
-    Cohort, DateCollect
+    DateCollect
   )
 
 #####
