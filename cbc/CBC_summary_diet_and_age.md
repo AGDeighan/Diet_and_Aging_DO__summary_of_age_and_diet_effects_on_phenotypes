@@ -1,9 +1,11 @@
 
 ## Summary of notable findings
 
-Hematocrit, hemoglobin, and RBC count all decrease with age, but the decrease is most rapid in the 2-day fasting groups. Also, while the increase in the number and percent of reticulocytes with age is not significantly affected by diet, the means at each timepoint are significantly affected by diet and are highest in the 2-day fasting mice. The CR groups have the highest red blood cell counts, hematocrit, and hemoglobin at both timepoints.
+Hematocrit, hemoglobin, and RBC count all decrease with age, but the decrease is most rapid in the 2-day fasting group. Also, while the increase in the number and percent of reticulocytes with age is not significantly affected by diet, the means at each timepoint are significantly affected by diet and are highest in the 2-day fasting mice. The CR groups have the highest red blood cell counts, hematocrit, and hemoglobin at both timepoints.
 
-RDW and HDW are elevated in the most extreme groups of both diet regimens (40% CR and 2-day fast) at 11 and 23 months, but their rate of increase with age from 11 to 23 months is lower.
+Mean RDW is significantly (Tukey p < 0.05) higher in the 2-day fasting group than all the other diet groups at both 11 months and 23 months. The mean RDW level in the 40% CR mice is also significantly higher (Tukey p < 0.05) than the ad libitum, 1-day fast, and 20% CR groups, but the rate of increase with age is lowest for the 40% CR (though the difference is not statistically significant) and by 23 months the mean RDW level in the 40% CR mice is not significantly different from the ad libitum, 1-day fast, and 20% CR groups.
+
+Mean HDW at 11 months is significantly (Tukey p < 0.05) higher in the 40% CR and 2-day fasting groups, but the rate of increase in HDW is slowest (though the difference is not statistically significant) for the 40% CR mice and by 23 months mean HDW is not higher in the 40% CR mice than the ad libitum, 1-day fast, and 20% CR groups. At 23 months, mean HDW is still highest in the 2-day fasting mice, but the diet effect is no longer significant.
 
 Neutrophil count increases with age. This increase appears to be exacerbated by the fasting regimens but reduced by the caloric restriction regimens. On the other hand, lymphocyte count decreases with age, and the rate of decrease is significantly greater in the 40% CR group than all the other diet groups. These two dynamics combine to mitigate the increase in the NLR in the 20% CR group compared to the other groups. This can also be seen in the percent counts. For all diets, the percent lymphocytes decrease with age and the percent neutrophils increase with age but the age effects on both are least pronounced in the 20% CR group; however, the age-diet interaction effect is not statistically significant (p > 0.05) for these two phenotypes.
 
@@ -28,23 +30,23 @@ Only the first two timepoints, 11 and 23 months, were used for testing diet and 
 
 <br>
 
-The direct effect of diet on each phenotype was estimated independently for each timepoint. When estimating these diet effects, cohort and collection date (test batch) were included as random effects and diet was treated as a fixed effect. For traits that are affected by platelet clumping (eosinophil and platelet phenotypes), the log-transformed clump-count was included as a fixed effect. The significance of the diet effect was assessed by comparing the full and null models shown below (note that for the eosinophil and platelet counts, both the full and null models also include a fixed effect term for log-transformed clump-count that is not shown below)  
- - Full model: Phenotype ~ (1 | Cohort) + (1 | DateCollect) + Diet
- - Null model: Phenotype ~ (1 | Cohort) + (1 | DateCollect)
+The direct effect of diet on each phenotype was estimated independently for each timepoint. When estimating these diet effects, collection date (test batch) was included as a random effect and diet was treated as a fixed effect. For traits that are affected by platelet clumping (eosinophil and platelet phenotypes), the log-transformed clump-count was included as a fixed effect. The significance of the diet effect was assessed by comparing the full and null models shown below (note that for the eosinophil and platelet counts, both the full and null models also include a fixed effect term for log-transformed clump-count that is not shown below)  
+ - Full model: Phenotype ~ (1 | DateCollect) + Diet
+ - Null model: Phenotype ~ (1 | DateCollect)
  
 For phenotypes significantly (p < 0.05) affected by diet at a timepoint, then the significance of the pairwise differences between each diet at that timepoint were assessed using a Tukey correction for multiple tests (R/emmeans).
 
 <br>
 
- The direct effect of age on each phenotype was estimated using a linear mixed model with diet, cohort, collection date (batch), and mouse ID as random effects and age in months as a fixed effect. For traits that are affected by platelet clumping (eosinophil and platelet phenotypes), the log-transformed clump-count was also included as a fixed effect. The significance of the age effect was assessed by comparing the full and null models shown below (note that for the eosinophil and platelet counts, both the full and null models also include a fixed effect term for log-transformed clump-count that is not shown below)  
- - Full model: Phenotype ~ (1 | Cohort) + (1 | MouseID) + (1 | DateCollect) + (1 | Diet) + Age
- - Null model: Phenotype ~ (1 | Cohort) + (1 | MouseID) + (1 | DateCollect) + (1 | Diet)
+ The direct effect of age on each phenotype was estimated using a linear mixed model with diet, collection date (batch), and mouse ID as random effects and age in months as a fixed effect. For traits that are affected by platelet clumping (eosinophil and platelet phenotypes), the log-transformed clump-count was also included as a fixed effect. The significance of the age effect was assessed by comparing the full and null models shown below (note that for the eosinophil and platelet counts, both the full and null models also include a fixed effect term for log-transformed clump-count that is not shown below)  
+ - Full model: Phenotype ~ (1 | MouseID) + (1 | DateCollect) + (1 | Diet) + Age
+ - Null model: Phenotype ~ (1 | MouseID) + (1 | DateCollect) + (1 | Diet)
 
  <br>
 
- The interaction effect of age and diet on each phenotype was estimated using a linear mixed model with cohort, collection date (batch), and mouse ID as random effects and diet, age in months, and the interaction between diet and age in months as fixed effects. For traits that are affected by platelet clumping (eosinophil and platelet phenotypes), the log-transformed clump-count was also included as a fixed effect. The significance of the age-diet interaction effect was assessed by comparing the full and null models shown below (note that for the eosinophil and platelet counts, both the full and null models also include a fixed effect term for log-transformed clump-count that is not shown below)  
- - Full model: Phenotype ~ (1 | Cohort) + (1 | MouseID) + (1 | DateCollect) + Diet + Age + Age:Diet
- - Null model: Phenotype ~ (1 | Cohort) + (1 | MouseID) + (1 | DateCollect) + Diet + Age
+ The interaction effect of age and diet on each phenotype was estimated using a linear mixed model with collection date (batch) and mouse ID as random effects and diet, age in months, and the interaction between diet and age in months as fixed effects. For traits that are affected by platelet clumping (eosinophil and platelet phenotypes), the log-transformed clump-count was also included as a fixed effect. The significance of the age-diet interaction effect was assessed by comparing the full and null models shown below (note that for the eosinophil and platelet counts, both the full and null models also include a fixed effect term for log-transformed clump-count that is not shown below)  
+ - Full model: Phenotype ~ (1 | MouseID) + (1 | DateCollect) + Diet + Age + Age:Diet
+ - Null model: Phenotype ~ (1 | MouseID) + (1 | DateCollect) + Diet + Age
  
  For phenotypes whose age effect significantly (p < 0.05) varies by diet, the significance of the pairwise differences between each diet were assessed using a Tukey correction for multiple tests (R/emmeans).
 
