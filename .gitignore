@@ -43,3 +43,7 @@ vignettes/*.pdf
 
 # Mac directory files
 *DS_Store*
+.Rproj.user
+
+# Ignore files in any directory titled "old"
+*old/
