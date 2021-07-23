@@ -60,6 +60,10 @@ PLOT_DATA <- DATASET$Diet_Effects %>%
     names_from = 'K',
     values_from = 'V'
   ) %>% 
+  group_by(Phenotype, Timepoint) %>% 
+  mutate(
+    Mean = as.numeric(scale(Mean, center = TRUE, scale = FALSE))
+  ) %>% 
   rowwise() %>% 
   mutate(
     Timepoint = factor(
@@ -72,8 +76,7 @@ PLOT_DATA <- DATASET$Diet_Effects %>%
     ),
     Position = as.numeric(Phenotype) + ((as.numeric(Diet) - 1)/4 - 0.5)*1/3,
     Mean = (
-      (Mean - DATASET$Info_Table$Mean[DATASET$Info_Table$Phenotype == Phenotype]) /
-        DATASET$Info_Table$SD[DATASET$Info_Table$Phenotype == Phenotype]
+      Mean/DATASET$Info_Table$SD[DATASET$Info_Table$Phenotype == Phenotype]
     ),
     SE = (
       SE/DATASET$Info_Table$SD[DATASET$Info_Table$Phenotype == Phenotype]
