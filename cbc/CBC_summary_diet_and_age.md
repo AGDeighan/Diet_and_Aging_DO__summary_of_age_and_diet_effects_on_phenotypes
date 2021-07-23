@@ -1,3 +1,16 @@
+# Diet and age effects on completel blood count phenotypes
+
+This directory contains the results of the analysis of diet and age effects on phenotypes measured by the complete blood count (CBC) assay. For each phenotype the direct effects of diet and age were estimated as well as the interaction between diet and age (i.e. the diet-specific effects of age). 
+
+The "figures" folder contains a large figure summarizing the diet and age effects across all of the phenotypes, as well as individual plots for each phenotype that give more detailed information on the diet and age effects for each phenotype. See the "Figures" section below for more details.
+
+The "results" folder has CSV files that contain the information on the estimated diet and age effects as well as a CSV file with generall information on the phenotypes. See the "Output files" section below for more information.
+
+The "scripts" folder contains the actual R-scripts used to run the analysis. The overall method is summarized below in the "Method" section.
+
+<br>
+<br>
+
 
 ## Summary of notable findings
 
@@ -19,7 +32,7 @@ For all diets except the 40% CR group monocyte count increases with age (note th
 
 The effects of diet and age on the CBC phenotypes were estimated using linear mixed models (R/lme4). The significance of age and diet effects were assessed with approximate F-tests using the Kenward and Roger (1997) approach (R/pbkrtest). Before fitting the models, percent cell counts were logit-transformed and phenotypes with a skewness (calculated using R/e1071) greater than 1 were log-transformed.
 
-Only the first two timepoints, 11 and 23 months, were used for testing diet and age effects because at 35 months there is notable survivor bias for the diet groups (only 14 ad libitum mice but 79 40% CR mice).
+Only the first two timepoints, 11 and 23 months, were used for testing the direct diet effects and the diet-age interaction effects because at 35 months there is notable survivor bias across the diet groups (only 14 ad libitum mice but 79 40% CR mice). However, for testing the direct age effects, all three timepoints were used. The table below shows the sample counts for each timepoint (some specific CBC phenotypes were missing more data, see the "phenotype_info_table.csv" file in the results folder for more information).
 
 | Timepoint  | Ad Libitum | 1-day fast | 2-day fast | 20% CR | 40% CR |
 | -----------| ---------- | ---------- | ---------- | ------ | ------ |  
@@ -57,14 +70,16 @@ For phenotypes significantly (p < 0.05) affected by diet at a timepoint, then th
 
 ## Figures
 
-The plots in "histograms_of_phenotypes_and_transformations.pdf" show the histograms of the untransformed and transformed (if a transform was performed) phenotype values (only including values from the timepoints used for analysis)
-
-The plots in "diet_and_age_effects_summarized.pdf" summarizes the age and diet effects on the phenotypes. The top figures show boxplots of each phenotype grouped by diet and timepoint. The phenotype values were normalized (mean = 0 and standard deviation = 1) before plotting so the y-axis is in units of standard deviations (of the transformed phenotype if a transform was made). Asterisks indicate phenotypes whose means at the indicated timepoint are significantly affected by diet at a family-wise error rate (F-test p-values adjusted using the Holm method for 26 tests) of 0.05. The bottom-left plot shows the overall/main age effects. The plot shows the age coefficient in units of standard deviations per month +/- 1 standard error. Asterisks indicate phenotypes that are significantly affected by age (FWER < 0.05). The bottom-right plot shows the diet-specific age affects, also in units of standard deviations per month. The asterisks indicate phenotypes for which the age-effect significantly (FWER < 0.05) varies by diet.
-
-The folder "individual_phenotype_plots" contains a separate PDF for each phenotype. Each PDF contains two figures. The top figure shows the distribution of the phenotype at each timepoint (including the timepoint(s) not included in analysis) with box-scatter plots grouped by diet. The bottom figure shows the mean and standard error of the phenotype at each timepoint. The caption below the two figures gives more details on results of the diet and age effect analysis for that phenotype.
-
-
-
+ - histograms_of_phenotypes_and_transformations.pdf: histograms of the untransformed and transformed (if a transform was performed) phenotype values
+ - diet_and_age_effects_summarized.pdf: summarizes the age and diet effects on the phenotypes  
+   - The top figures show the estimated effect (intercept effect, a shift in the mean) of each diet on the mean of each phenotype at each timepoint. All the phenotypes were Z-scaled (mean 0 and standard deviation 1), so the units of the estimated effects are in standard deviations. A positive diet coefficient for a given phenotype at a given timepoint, indicates that the specified diet group had a higher mean relative to the other diet groups. The Holm (1979) correction for a family wise error rate (FWER) for 26 tests (the number of phenotypes tested) was made separately for each timepoint. Phenotypes that were significantly affected (FWER < 0.05) by diet at a given timepoint are indicated by an asterisk.
+   - The bottom-left plot shows the overall/main age effects. The plot shows the age coefficient in units of standard deviations per month +/- 1 standard error. Thus, an age coefficient of -0.05 indicates that the mean value of a phenotype across diets decreases 0.05 standard deviations per month. Again, the Holm correction (26 tests) for a family wise error rate was used to determine the statistical significance of the age effects. Phenotypes that are significantly (FWER < 0.05) affected by age are indicated by an asterisk on the left edge of the plot.
+   - The bottom-right plot shows the diet-specific age affects, also in units of standard deviations per month. Again, the Holm correction (26 tests) for a family wise error rate was used to determine the statistical significance. Phenotypes for which the age effect varies significantly (FWER < 0.05) by diet are indicated by an asterisk on the right edge of the plot.
+- individual_phenotype_plots: this folder contains a separate PDF for each phenotype, each PDF contains two figures
+   - The top figure shows the distribution of the phenotype at each timepoint with box-scatter plots grouped by diet.
+   - The bottom figure shows the mean and standard error of the phenotype at each timepoint.
+   - The caption below the two figures gives the detailed results of the diet and age effect analysis for the phenotype.
+   
 
 <br>
 <br>
