@@ -71,13 +71,14 @@ for(PHENO in as.character(DATASET$Info_Table$Phenotype)){
   TRANSFORMED_DATA <- TRANSFORMED_DATA %>% 
     select(-Pheno)
   
-  PHENO_LABEL <- ifelse(
-    DATASET$Info_Table$Transform[DATASET$Info_Table$Phenotype == PHENO] == 'none', PHENO,
-    paste0(
-      DATASET$Info_Table$Transform[DATASET$Info_Table$Phenotype == PHENO],
-      '[', PHENO, ']'
-    )
-  )
+  # PHENO_LABEL <- ifelse(
+  #   DATASET$Info_Table$Transform[DATASET$Info_Table$Phenotype == PHENO] == 'none', PHENO,
+  #   paste0(
+  #     DATASET$Info_Table$Transform[DATASET$Info_Table$Phenotype == PHENO],
+  #     '[', PHENO, ']'
+  #   )
+  # )
+  PHENO_LABEL <- 'logit[%]'
   
   TP_BOXPLOT <- DATA %>%
     ggplot() +
