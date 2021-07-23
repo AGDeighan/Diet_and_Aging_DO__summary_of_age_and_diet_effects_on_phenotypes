@@ -47,3 +47,19 @@ vignettes/*.pdf
 
 # Ignore files in any directory titled "old"
 *old/
+
+# Ignore files with "test" or "old" at the end of the filename
+*test.*
+*old.*
+
+# Ignore reference material
+*references/
+
+# Ignore PDF versions of readme and summary files
+*ReadME*.pdf
+*README*.pdf
+*Summary*.pdf
+*summary*.pdf
+
+# Results files
+*results/
