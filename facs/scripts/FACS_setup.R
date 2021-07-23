@@ -424,10 +424,7 @@ TRANSFORM_FUNCTIONS <- list(
 ################################################################################
 ##### Plot histograms of phenotypes #####
 
-PLOT_DATA <- PHENO_DATA %>% 
-  filter(
-    Timepoint %in% TIMEPOINTS_FOR_ANALYSIS
-  )
+PLOT_DATA <- PHENO_DATA
 
 pdf(
   paste0(
