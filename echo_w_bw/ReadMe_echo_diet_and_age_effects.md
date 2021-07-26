@@ -22,7 +22,7 @@ N/A
 
 ## Method
 
-The effects of diet and age on the FACS phenotypes were estimated using linear mixed models (R/lme4). The significance of age and diet effects were assessed with approximate F-tests using the Kenward and Roger (1997) approach (R/pbkrtest). The traits were not too strongly skewed. The traits were not transformed before model fitting and testing. There were only two traits that has a skewness greater than one (LVMass and LVMassCorrected had a skewness of 1.06), and both just barely so. 
+The effects of diet and age on the cardiac phenotypes were estimated using linear mixed models (R/lme4). The significance of age and diet effects were assessed with approximate F-tests using the Kenward and Roger (1997) approach (R/pbkrtest). The traits were not too strongly skewed. The traits were not transformed before model fitting and testing. There were only two traits that has a skewness greater than one (LVMass and LVMassCorrected had a skewness of 1.06), and both just barely so. 
 
 Only the first two timepoints, 10 and 22 months, were used for testing the direct diet effects and the diet-age interaction effects because at 34 months there is notable survivor bias across the diet groups (only 17 ad libitum mice but 91 40% CR mice). However, for testing the direct age effects, all three timepoints were used. The table below shows the sample counts for each timepoint (see the "phenotype_info_table.csv" file in the results folder for more information).
 
