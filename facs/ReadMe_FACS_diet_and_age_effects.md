@@ -83,24 +83,24 @@ There are four primary output files which contain the results of the analysis an
     - Phenotype: the name of the phenotype
     - Description: description of the phenotype
     - Assay: the name of the assay to which the phenotype belongs
-    - NAll_11months: The total number of non-missing samples/values from the 11 month timepoint 	
-    - NAll_23months: The total number of non-missing samples/values from the 23 month timepoint 	
-    - NAll_35months: The total number of non-missing samples/values from the 35 month timepoint 	
-    - NAL_11months: The number of non-missing samples/values from the 11 month timepoint belonging to mice of the ad libitum group	
-    - NAL_23months: The number of non-missing samples/values from the 23 month timepoint belonging to mice of the ad libitum group	
-    - NAL_35months: The number of non-missing samples/values from the 35 month timepoint belonging to mice of the ad libitum group	
-    - N1D_11months: The number of non-missing samples/values from the 11 month timepoint belonging to mice of the 1-day fasting group		
-    - N1D_23months: The number of non-missing samples/values from the 23 month timepoint belonging to mice of the 1-day fasting group		
-    - N1D_35months: The number of non-missing samples/values from the 35 month timepoint belonging to mice of the 1-day fasting group		
-    - N2D_11months: The number of non-missing samples/values from the 11 month timepoint belonging to mice of the 2-day fasting group		
-    - N2D_23months: The number of non-missing samples/values from the 23 month timepoint belonging to mice of the 2-day fasting group		
-    - N2D_35months: The number of non-missing samples/values from the 35 month timepoint belonging to mice of the 2-day fasting group		
-    - N20_11months: The number of non-missing samples/values from the 11 month timepoint belonging to mice of the 20% caloric restriction group		
-    - N20_23months: The number of non-missing samples/values from the 23 month timepoint belonging to mice of the 20% caloric restriction group		
-    - N20_35months: The number of non-missing samples/values from the 35 month timepoint belonging to mice of the 20% caloric restriction group		
-    - N40_11months: The number of non-missing samples/values from the 11 month timepoint belonging to mice of the 40% caloric restriction group		
-    - N40_23months: The number of non-missing samples/values from the 23 month timepoint belonging to mice of the 40% caloric restriction group		
-    - N40_35months: The number of non-missing samples/values from the 35 month timepoint belonging to mice of the 40% caloric restriction group	
+    - NAll_05months: The total number of non-missing samples/values from the 5 month timepoint 	
+    - NAll_16months: The total number of non-missing samples/values from the 16 month timepoint 	
+    - NAll_28months: The total number of non-missing samples/values from the 28 month timepoint 	
+    - NAL_05months: The number of non-missing samples/values from the 5 month timepoint belonging to mice of the ad libitum group	
+    - NAL_16months: The number of non-missing samples/values from the 16 month timepoint belonging to mice of the ad libitum group	
+    - NAL_28months: The number of non-missing samples/values from the 28 month timepoint belonging to mice of the ad libitum group	
+    - N1D_05months: The number of non-missing samples/values from the 5 month timepoint belonging to mice of the 1-day fasting group		
+    - N1D_16months: The number of non-missing samples/values from the 16 month timepoint belonging to mice of the 1-day fasting group		
+    - N1D_28months: The number of non-missing samples/values from the 28 month timepoint belonging to mice of the 1-day fasting group		
+    - N2D_05months: The number of non-missing samples/values from the 5 month timepoint belonging to mice of the 2-day fasting group		
+    - N2D_16months: The number of non-missing samples/values from the 16 month timepoint belonging to mice of the 2-day fasting group		
+    - N2D_28months: The number of non-missing samples/values from the 28 month timepoint belonging to mice of the 2-day fasting group		
+    - N20_05months: The number of non-missing samples/values from the 5 month timepoint belonging to mice of the 20% caloric restriction group		
+    - N20_16months: The number of non-missing samples/values from the 16 month timepoint belonging to mice of the 20% caloric restriction group		
+    - N20_28months: The number of non-missing samples/values from the 28 month timepoint belonging to mice of the 20% caloric restriction group		
+    - N40_05months: The number of non-missing samples/values from the 5 month timepoint belonging to mice of the 40% caloric restriction group		
+    - N40_16months: The number of non-missing samples/values from the 16 month timepoint belonging to mice of the 40% caloric restriction group		
+    - N40_28months: The number of non-missing samples/values from the 28 month timepoint belonging to mice of the 40% caloric restriction group	
     - Skewness: The skewness of the untransformed data
     - Kurtosis: The kurtosis of the untransformed data
     - Transform: Transform performed on the data before model fitting (if any)
