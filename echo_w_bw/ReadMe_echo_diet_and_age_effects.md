@@ -1,4 +1,4 @@
-# Diet and age effects on echocariography phenotypes conditioned on bodyweight
+# Diet and age effects on echocardiography phenotypes conditioned on bodyweight
 
 This directory contains the results of the analysis of diet and age effects on phenotypes measured by the echocardiography assay (cardiac traits) conditioned on bodyweight. In comparison to the result of the tests in which bodyweight was not included as a covariate, these results can be interpreted as the diet and age effects on the cardiac traits that are not solely mediated by changes in bodyweight. For each phenotype the direct effects of diet and age were estimated as well as the interaction between diet and age (i.e. the diet-specific effects of age). 
 

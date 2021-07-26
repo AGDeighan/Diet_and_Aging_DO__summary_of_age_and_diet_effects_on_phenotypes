@@ -1,4 +1,4 @@
-# Diet and age effects on echocariography phenotypes
+# Diet and age effects on echocardiography phenotypes
 
 This directory contains the results of the analysis of diet and age effects on phenotypes measured by the echocardiography assay (cardiac traits). For each phenotype the direct effects of diet and age were estimated as well as the interaction between diet and age (i.e. the diet-specific effects of age). 
 
