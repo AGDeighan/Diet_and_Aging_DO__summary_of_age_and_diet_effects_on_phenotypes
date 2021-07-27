@@ -311,7 +311,7 @@ for(PHENO in as.character(DATASET$Info_Table$Phenotype)){
   
   
   i <- 0
-  for(INDEX in seq(130, nchar(CAPTION_TEXT), by = 130)){
+  for(INDEX in seq(180, nchar(CAPTION_TEXT), by = 180)){
     POSITION <- INDEX + i
     if(substr(CAPTION_TEXT, POSITION, POSITION) != ' '){
       for(j in 1:20){
