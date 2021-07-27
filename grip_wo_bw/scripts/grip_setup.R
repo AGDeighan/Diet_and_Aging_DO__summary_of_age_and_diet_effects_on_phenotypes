@@ -123,7 +123,7 @@ PHENO_DATA %>%
 #  29 months 0.152  0.191 0.183 0.222 0.252
 #  35 months 0.0738 0.139 0.184 0.230 0.373
 
-TIMEPOINTS_FOR_ANALYSIS <- paste0(c('05', '11', '17', '23'), ' months')
+TIMEPOINTS_FOR_ANALYSIS <- paste0(c('05', '11', '17', '23', '29'), ' months')
 
 #####
 
