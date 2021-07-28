@@ -72,7 +72,7 @@ ASSAY <- 'Grip'
 ################################################################################
 ##### Select timepoints to test for diet and diet-age effects #####
 
-# We will exclude the 29 and 35 month timepoints when estimating direct diet 
+# We will exclude the 35 month timepoint when estimating direct diet 
 # effects and diet=age interaction effects
 
 PHENO_DATA %>% 
