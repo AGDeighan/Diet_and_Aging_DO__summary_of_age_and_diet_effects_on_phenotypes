@@ -12,9 +12,17 @@ The "scripts" folder contains the actual R-scripts used to run the analysis. The
 <br>
 
 
-## Summary of notable findings
+## Summary of results
 
-N/A
+The results of the analysis of diet and age effects on body temperature are similar when conditioning on bodyweight and when ignoring bodyweight.   
+
+Body temperature decreases with age and the change with age is not significantly affected by diet.  
+
+While we did not observe a significant diet effect on the change in body temperature with age, diet does clearly have a significant effect on mean temperature at most timepoints. From 10 through 22 months body temperature is generally lower in the fasting and caloric restricted mice, in a pattern that reflects the severity of the diet (AL > 1D > 2D > 20 > 40). At 28 months, body temperature does appear lower in the dieting mice than the ad libitum mice, but the linear trend is not evident. This could be due to some sort of survival bias, smaller sample size, or a true change in late life.   
+
+At 5 months (before the start of the diet intervention), there is a significant difference between the groups. However, the p-values are not extremely small (0.015 for the test independent of bodyweight and 0.012 for the test conditioned on bodyweight) and the trend in body temperature differences are not the same as those seen at later timepoints (~~AL > 1D > 2D > 20 > 40~~), so we can be confident that differences between groups before the start of the intervention did *not* cause the diet effects observed at later timepoints.    
+
+At 8 months there is no significant difference in mean body temperature between the diet groups, but this is likely due to the small sample size (150 mice in total). The decision to due an early-life (5 month) frailty and body temperature assessment was not made until some of the mice were already too old. It is this smaller group of mice that make up the "8 month" timepoint.
 
 <br>
 <br>
