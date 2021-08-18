@@ -1,6 +1,6 @@
-# Diet and age effects on grip strength phenotypes
+# Diet and age effects on grip strength phenotypes conditioned on bodyweight
 
-This directory contains the results of the analysis of diet and age effects on phenotypes measured by the grip strength assay. For each phenotype the direct effects of diet and age were estimated as well as the interaction between diet and age (i.e. the diet-specific effects of age). 
+This directory contains the results of the analysis of diet and age effects on phenotypes measured by the grip strength assay condtioned on bodyweight. For each phenotype the direct effects of diet and age were estimated as well as the interaction between diet and age (i.e. the diet-specific effects of age). 
 
 The "figures" folder contains a large figure summarizing the diet and age effects across all of the phenotypes, as well as individual plots for each phenotype that give more detailed information on the diet and age effects for each phenotype. See the "Figures" section below for more details.
 
@@ -38,23 +38,23 @@ Only the first five timepoints (5, 11, 17, 23, and 29 months) were used for test
 
 <br>
 
-The direct effect of diet on each phenotype was estimated independently for each timepoint. When estimating these diet effects, collection date (test batch) was included as a random effect and diet was treated as a fixed effect. The significance of the diet effect was assessed by comparing the full and null models shown below:  
- - Full model: Phenotype ~ (1 | DateCollect) + Diet
- - Null model: Phenotype ~ (1 | DateCollect)
+The direct effect of diet on each phenotype was estimated independently for each timepoint. When estimating these diet effects, collection date (test batch) was included as a random effect and weight and diet were treated as fixed effects. The significance of the diet effect was assessed by comparing the full and null models shown below:  
+ - Full model: Phenotype ~ (1 | DateCollect) + Bodyweight + Diet
+ - Null model: Phenotype ~ (1 | DateCollect) + Bodyweight 
  
 For phenotypes significantly (p < 0.05) affected by diet at a timepoint, the significance of the pairwise differences between each diet at that timepoint were assessed using a Tukey correction for multiple tests (R/emmeans).
 
 <br>
 
- The direct effect of age on each phenotype was estimated using a linear mixed model with diet, collection date (batch), and mouse ID as random effects and age in months as a fixed effect. The significance of the age effect was assessed by comparing the full and null models shown below:
- - Full model: Phenotype ~ (1 | MouseID) + (1 | DateCollect) + (1 | Diet) + Age
- - Null model: Phenotype ~ (1 | MouseID) + (1 | DateCollect) + (1 | Diet)
+ The direct effect of age on each phenotype was estimated using a linear mixed model with diet, collection date (batch), and mouse ID as random effects and weight and age in months as fixed effects. The significance of the age effect was assessed by comparing the full and null models shown below:
+ - Full model: Phenotype ~ (1 | MouseID) + (1 | DateCollect) + (1 | Diet) + Bodyweight  + Age
+ - Null model: Phenotype ~ (1 | MouseID) + (1 | DateCollect) + (1 | Diet) + Bodyweight 
 
  <br>
 
- The interaction effect of age and diet on each phenotype was estimated using a linear mixed model with collection date (batch) and mouse ID as random effects and diet, age in months, and the interaction between diet and age in months as fixed effects. The significance of the age-diet interaction effect was assessed by comparing the full and null models shown below:
- - Full model: Phenotype ~ (1 | MouseID) + (1 | DateCollect) + Diet + Age + Age:Diet
- - Null model: Phenotype ~ (1 | MouseID) + (1 | DateCollect) + Diet + Age
+ The interaction effect of age and diet on each phenotype was estimated using a linear mixed model with collection date (batch) and mouse ID as random effects and weight, diet, age in months, and the interaction between diet and age in months as fixed effects. The significance of the age-diet interaction effect was assessed by comparing the full and null models shown below:
+ - Full model: Phenotype ~ (1 | MouseID) + (1 | DateCollect) + Bodyweight  + Diet + Age + Age:Diet
+ - Null model: Phenotype ~ (1 | MouseID) + (1 | DateCollect) + Bodyweight  + Diet + Age
  
  For phenotypes whose age effect significantly (p < 0.05) varies by diet, the significance of the pairwise differences between each diet were assessed using a Tukey correction for multiple tests (R/emmeans).
 
