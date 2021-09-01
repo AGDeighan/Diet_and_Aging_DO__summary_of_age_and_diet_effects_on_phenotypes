@@ -14,7 +14,26 @@ The "scripts" folder contains the actual R-scripts used to run the analysis. The
 
 ## Notes
 
+*Keep in mind: higher scores are worse*  
+
 While there are no diet effects on the frailty data at the 5-month timepoint (because the diets were started at 6 months), diet-group has a significant effect on mean frailty at 5 months. Fortunately, The ad libitum group has the lowest overall frailty score at 5 months, so any increase in frailty in the ad libitum mice compared to the other diet groups cannot be attributed to baseline differences. The two diet-groups that have significantly (Tukey honestly significant difference) different mean frailty values at 5 months are the mice assigned to the ad libitum group and the mice assigned to the 20% CR group (the mean frailty is higher in the 20% CR group). Additionally, when looking at the individual frailty components at 5 months, the mice assigned to the 2-day fasting group have significantly more dermatitis than the other four groups and the mice assigned to the 20% CR group have more loss of whiskers than the other four groups. The higher dermatitis in the 2-day fasting group does not persist across all the timepoints (perhaps because dermatitis is a reason for euthanasia), but the 20% CR mice consistently are among the groups with high loss of whisker scores across the timepoints.
+
+
+<br>
+<br>
+
+
+## Summary of results  
+
+*Keep in mind: higher scores are worse*  
+
+The overall mean frailty score (mean of component indices) increases with age and the rate of increase is most rapid for the ad libitum mice. The rate of increase for the ad libitum mice is significantly (Tukey p-value < 0.05) greater than the rate of increase for the 2-day fasting mice, the 20% CR mice, and the 40% CR mice. In addition to a difference in the overall frailty score, several of the individual component indices are affected by diet.  
+
+   - Dermatitis and alopecia both increase most rapidly in the ad libitum mice. Alopecia increases significantly (Tukey p-value < 0.05) more quickly in the ad libitum mice than any of the other diet groups, and significantly (Tukey p-value < 0.05) more slowly in the 40% CR group than any of the other groups. The rate of increase in dermatitis is significantly (Tukey p-value < 0.05) higher in the ad libitum mice than the 2-day fasting, 20% CR, and 40% CR mice. In addition to the baseline differences described in the **Notes** section above, another point to keep in mind with dermatitis is that it was one of our conditions for euthanisia. Therefore, mice that develop dermatitis may often be shortly thereafter euthanized and this dermatitis may not appear to increase as quickly with age as it would if the mice were not euthanized.  
+   - The change in the distended abdomen and tumor scores with age is also affected by diet. The rate of increase for the tumor score is significantly (Tukey p-value < 0.05) lower in the 2-day fasting and 40% CR groups than the other groups (the difference between the 20% CR group and the ad libitum and 1-day fasting groups is not significant). Similarly, the distended abdoman score increases significantly (Tukey p-value < 0.05) faster in the ad libitum and 1-day fasting groups than the other groups.  
+   - Gait disorders increase significantly (Tukey p-value < 0.05) more rapidly with age for the ad libitum mice than the 2-day, 20% CR, and 40% CR groups.
+   - Abnormalities in breathing rate and/or depth increases significantly (Tukey p-value < 0.05) more rapidly for the ad libitum mice than the other groups.
+   - The 40% CR mice actually perform *worse* in terms of tremors and body condition. The tremor score increases significantly (Tukey p-value < 0.05) more rapidly in the 40% CR mice than in the 1-day and 2-day fasting mice (the difference from ad libitum and 20% CR is not significant). The body condition score increases significantly (Tukey p-value < 0.05) more rapidly in the 40% CR mice than in the 1-day, 2-day, and 20% CR mice (the difference from ad libitum is not significant).
 
 <br>
 <br>
