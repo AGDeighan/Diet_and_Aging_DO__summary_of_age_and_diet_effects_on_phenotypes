@@ -87,6 +87,43 @@ for(PHENO in DATASET$Info_Table$Phenotype){
         all_of(na.omit(c(PHENO, VOI, REF_TERMS, FEF_TERMS)))
       )
     
+    if(abs(diff(range(MODEL_DATA[[PHENO]], na.rm = TRUE))) < 0.1){
+      # If all values are the same, just return NA values
+      DF_ROW <- tibble(
+        Phenotype = PHENO,
+        Timepoint = TP,
+        AL_Mean = NA,
+        AL_SE = NA,
+        `1D_Mean` = NA,
+        `1D_SE` = NA,
+        `2D_Mean` = NA,
+        `2D_SE` = NA,
+        `20_Mean` = NA,
+        `20_SE` = NA,
+        `40_Mean` = NA,
+        `40_SE` = NA,
+        Diet_FTestStat = NA,
+        Diet_FTestNumDF = NA,
+        Diet_FTestDenDF = NA,
+        Diet_FTestScaling = NA,
+        Diet_FTestPValue = NA,
+        Diet_PairwiseDifferences = NA
+      )
+      
+      DIET_EFFECTS <- rbind(
+        DIET_EFFECTS,
+        DF_ROW
+      )
+      
+      rm(
+        MODEL_DATA,
+        VOI, FEF_TERMS, REF_TERMS,
+        DF_ROW
+      )
+      
+      next
+    }
+    
     ### Create formulas
     REF_TERMS <- paste0('(1|', REF_TERMS, ')', collapse = ' + ')
     FEF_TERMS <- paste0(FEF_TERMS, collapse = ' + ')

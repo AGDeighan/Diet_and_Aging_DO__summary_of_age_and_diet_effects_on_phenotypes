@@ -39,7 +39,8 @@ DATASET <- readRDS('data/Frailty_diet_age_dataset.rds')
 PLOT_DATA <- DATASET$Diet_Effects %>% 
   group_by(Timepoint) %>% 
   mutate(
-    FWER = p.adjust(Diet_FTestPValue, 'holm')
+    FWER = p.adjust(Diet_FTestPValue, 'holm'),
+    FWER = ifelse(is.na(FWER), 1, FWER)
   ) %>% 
   ungroup() %>% 
   select(
@@ -80,6 +81,7 @@ PLOT_DATA <- DATASET$Diet_Effects %>%
     Mean = (
       Mean/DATASET$Info_Table$SD[DATASET$Info_Table$Phenotype == Phenotype]
     ),
+    Mean = ifelse(is.na(Mean), 0, Mean), 
     SE = (
       SE/DATASET$Info_Table$SD[DATASET$Info_Table$Phenotype == Phenotype]
     )
@@ -88,7 +90,7 @@ PLOT_DATA <- DATASET$Diet_Effects %>%
 
 LIMITS <- PLOT_DATA %>% 
   summarise(
-    M = max(abs(c(min(Mean - SE), max(Mean + SE))))
+    M = max(abs(c(min(Mean - SE, na.rm = TRUE), max(Mean + SE, na.rm = TRUE))), na.rm = TRUE)
   ) %>% 
   unlist() %>% 
   as.numeric()
@@ -273,7 +275,7 @@ PLOT_DATA <- rbind(
 
 LIMITS <- PLOT_DATA %>% 
   summarise(
-    M = max(abs(c(min(Coef - SE), max(Coef + SE))))
+    M = max(abs(c(min(Coef - SE, na.rm = TRUE), max(Coef + SE, na.rm = TRUE))), na.rm = TRUE)
   ) %>% 
   unlist() %>% 
   as.numeric()

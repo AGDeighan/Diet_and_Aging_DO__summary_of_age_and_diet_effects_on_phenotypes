@@ -26,7 +26,7 @@ While there are no diet effects on the frailty data at the 5-month timepoint (be
 
 *Keep in mind: higher scores are worse*  
 
-In general, the effects of age and diet on frailty conditioned on bodyweight are similar to those when bodyweight is ignored. However when conditioning on bodyweight, the rate of increase in tumors is no longer significantly (Tukey p-value < 0.05) lower in the 40% CR mice than the AL, 1-day, and 20% CR mice. This may simply be because the bodyweights of the 40% CR mice are *so* much lower than the other groups that including a bodyweight term gobbles up all of the observed diet effect.
+In general, the effects of age and diet on frailty conditioned on bodyweight are similar to those when bodyweight is ignored. However when conditioning on bodyweight, the rate of increase in tumors is no longer significantly (Tukey p-value < 0.05) lower in the 40% CR mice than the AL, 1-day, and 20% CR mice. This may simply be because the bodyweights of the 40% CR mice are *so* much lower than the other groups that including a bodyweight term absorbs all of the observed diet effect.
 
 <br>
 <br>
